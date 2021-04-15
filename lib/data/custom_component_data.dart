@@ -6,7 +6,7 @@ class MyComponentData {
 
   String label;
   String description;
-  String note;
+  String templateId;
 
   List<PortData> ports = [];
 
@@ -16,7 +16,7 @@ class MyComponentData {
     this.color = Colors.white,
     this.label = '',
     this.description,
-    this.note,
+    this.templateId,
     this.ports,
   }) : assert(ports != null);
 
@@ -25,7 +25,7 @@ class MyComponentData {
           color: customData.color,
           label: customData.label,
           description: customData.description,
-          note: customData.note,
+          templateId: customData.templateId,
           ports: List.from(
               customData.ports.map((portData) => PortData.copy(portData))),
         );

@@ -20,6 +20,15 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
   bool areOptionsVisible = true;
 
   Future<bool> isComponentSetLoading;
+  Future<bool> isDiagramLoading;
+
+  final pipelineUrlController = TextEditingController(
+      text:
+          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1519816576397');
+          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1497543801843');
+          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1468331256943');
+          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1468324550431'); // red comps
+          'https://demo.etl.linkedpipes.com/resources/pipelines/1560425451529');
 
   @override
   void initState() {
@@ -96,6 +105,30 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
                     ),
                   ],
                 ),
+              ),
+              Positioned(
+                right: 24,
+                top: 24,
+                child: Column(children: [
+                  Container(
+                    width: 320,
+                    height: 64,
+                    child: TextField(
+                      controller: pipelineUrlController,
+                      decoration: InputDecoration(
+                        labelText: 'Pipeline URL',
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      myPolicySet.removeAll();
+                      myPolicySet.loadPipeline(pipelineUrlController.text);
+                      print('load button');
+                    },
+                    child: Text('LOAD'),
+                  ),
+                ]),
               ),
               Align(
                 alignment: Alignment.bottomLeft,

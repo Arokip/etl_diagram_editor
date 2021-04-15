@@ -99,9 +99,9 @@ mixin CustomPolicy implements PolicySet {
     multipleSelected.remove(componentId);
   }
 
-  // TODO: duplicate check
-  String duplicate(ComponentData componentData) {
+  ComponentData duplicate(ComponentData componentData, {String newId}) {
     var newComponentData = ComponentData(
+      id: newId,
       type: componentData.type,
       size: componentData.size,
       minSize: componentData.minSize,
@@ -109,8 +109,7 @@ mixin CustomPolicy implements PolicySet {
       position: componentData.position + Offset(32, 32),
     );
 
-    addComponentDataWithPorts(newComponentData);
-    return newComponentData.id;
+    return newComponentData;
   }
 
   showLinkOption(String linkId, Offset position) {
@@ -173,6 +172,10 @@ mixin CustomPolicy implements PolicySet {
 
     return true;
   }
+
+  Color colorFromString(String colorString) {
+    return Color(int.parse(colorString.substring(1), radix: 16) + 0xFF000000);
+  }
 }
 
 mixin CustomBehaviourPolicy implements PolicySet, CustomPolicy {
@@ -194,8 +197,10 @@ mixin CustomBehaviourPolicy implements PolicySet, CustomPolicy {
   duplicateSelected() {
     List<String> duplicated = [];
     multipleSelected.forEach((componentId) {
-      String newId = duplicate(canvasReader.model.getComponent(componentId));
-      duplicated.add(newId);
+      var newComponentData =
+          duplicate(canvasReader.model.getComponent(componentId));
+      addComponentDataWithPorts(newComponentData);
+      duplicated.add(newComponentData.id);
     });
     hideAllHighlights();
     multipleSelected = [];

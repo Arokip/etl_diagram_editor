@@ -40,23 +40,6 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
           highlightPossiblePorts(componentId);
         }
       }
-      // if (isReadyToConnect) {
-      //   isReadyToConnect = false;
-      //   bool connected = connectComponents(selectedComponentId, componentId);
-      //   if (connected) {
-      //     print('connected');
-      //     selectedComponentId = null;
-      //   } else {
-      //     print('not connected');
-      //     selectedComponentId = componentId;
-      //     highlightComponent(componentId);
-      //   }
-      // } else {
-
-      // }
-      //
-      // selectedComponentId = componentId;
-      // highlightComponent(componentId);
     }
   }
 
@@ -94,7 +77,6 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
         });
       });
     } else {
-      // canvasWriter.model.moveComponent(componentId, positionDelta);
       var component = canvasReader.model.getComponent(componentId);
       if (component.type == 'component') {
         canvasWriter.model

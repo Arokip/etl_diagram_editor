@@ -18,12 +18,6 @@ class EtlComponent extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        // color: customData.color == null
-        //     ? Color(
-        //         int.parse(template.color.substring(1), radix: 16) + 0xFF000000)
-        //     // : Color(int.parse(customData.color.substring(1), radix: 16) +
-        //     //     0xFF000000),
-        //     : customData.color,
         color: customData.color,
         border: Border.all(
           width: 2.0,
@@ -71,13 +65,6 @@ ComponentData generateEtlComponentData({
   int outPortIndex = 1;
 
   ports.forEach((port) {
-    // if (port.io == EtlPortItemType.inputConf) {
-    //   portColor = Colors.pink;
-    // } else if (port.io == EtlPortItemType.input) {
-    //   portColor = Colors.green;
-    // } else if (port.io == EtlPortItemType.output) {
-    //   portColor = Colors.yellow;
-    // }
     bool isPortInput = port.io == EtlPortItemType.inputConf ||
         port.io == EtlPortItemType.input;
     Color portColor =
@@ -92,15 +79,12 @@ ComponentData generateEtlComponentData({
             (isPortInput)
                 ? ((2 * inPortIndex++ - 1) / (inPortCount * 2)) * 2 - 1
                 : ((2 * outPortIndex++ - 1) / (outPortCount * 2)) * 2 - 1),
-        // type:
-        //     '${port.portType}${(isPortInput) ? EtlPortItemType.input.toString() : EtlPortItemType.output.toString()}',
         type: port.portType,
       ),
     );
   });
 
   return ComponentData(
-    id: template.id,
     position: position,
     size: size,
     type: 'component',
@@ -109,6 +93,7 @@ ComponentData generateEtlComponentData({
           Color(int.parse(template.color.substring(1), radix: 16) + 0xFF000000),
       label: template.label,
       ports: portDataList,
+      templateId: template.id,
     ),
   );
 }

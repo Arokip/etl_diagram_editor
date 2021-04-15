@@ -49,10 +49,11 @@ mixin MyComponentWidgetsPolicy implements ComponentWidgetsPolicy, CustomPolicy {
             tooltip: 'duplicate',
             size: 40,
             onPressed: () {
-              String newId = duplicate(componentData);
-              selectedComponentId = newId;
               hideComponentHighlight(componentData.id);
-              highlightComponent(newId);
+              var newComponentData = duplicate(componentData);
+              addComponentDataWithPorts(newComponentData);
+              selectedComponentId = newComponentData.id;
+              highlightComponent(newComponentData.id);
             },
           ),
           SizedBox(width: 12),

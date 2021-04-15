@@ -44,14 +44,6 @@ class EtlComponentsJsonObject {
       return false;
     });
   }
-
-  // EtlComponentsGraph searchForTemplate(String template) {
-  //   return graphList.firstWhere((graph) {
-  //     // print('graph.id: ${graph.id}');
-  //     // print('string template: $template');
-  //     return graph.id == template;
-  //   });
-  // }
 }
 
 class EtlComponentsGraph {
