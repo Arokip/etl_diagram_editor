@@ -63,17 +63,28 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
     Offset positionDelta = details.localFocalPoint - lastFocalPoint;
 
     if (isMultipleSelectionOn) {
+      List<String> portsOnSelected = [];
+      multipleSelected.forEach((compId) {
+        portsOnSelected
+            .addAll(canvasReader.model.getComponent(compId).childrenIds);
+      });
+
       multipleSelected.forEach((compId) {
         var cmp = canvasReader.model.getComponent(compId);
 
         canvasWriter.model.moveComponentWithChildren(compId, positionDelta);
 
-        cmp.connections.forEach((connection) {
-          if (connection is ConnectionOut &&
-              multipleSelected.contains(connection.otherComponentId)) {
-            canvasWriter.model.moveAllLinkMiddlePoints(
-                connection.connectionId, positionDelta);
-          }
+        cmp.childrenIds.forEach((portId) {
+          canvasReader.model
+              .getComponent(portId)
+              .connections
+              .forEach((connection) {
+            if (connection is ConnectionOut &&
+                portsOnSelected.contains(connection.otherComponentId)) {
+              canvasWriter.model.moveAllLinkMiddlePoints(
+                  connection.connectionId, positionDelta);
+            }
+          });
         });
       });
     } else {

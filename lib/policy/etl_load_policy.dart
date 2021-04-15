@@ -190,8 +190,6 @@ mixin EtlLoadPolicy implements PolicySet, CustomPolicy {
       }
     });
 
-    print('CC: ${canvasReader.model.getAllComponents().length}');
-
     return true;
   }
 }
