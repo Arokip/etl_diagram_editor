@@ -16,19 +16,13 @@ mixin MyLinkAttachmentPolicy implements LinkAttachmentPolicy {
     );
 
     switch (componentData.type) {
-      case 'oval':
+      case 'port':
         Offset pointAlignment = pointPosition / pointPosition.distance;
 
         return Alignment(pointAlignment.dx, pointAlignment.dy);
         break;
-      case 'crystal':
-        Offset pointAlignment =
-            pointPosition / (pointPosition.dx.abs() + pointPosition.dy.abs());
 
-        return Alignment(pointAlignment.dx, pointAlignment.dy);
-        break;
-
-      default:
+      case 'component':
         Offset pointAlignment;
         if (pointPosition.dx.abs() >= pointPosition.dy.abs()) {
           pointAlignment = Offset(pointPosition.dx / pointPosition.dx.abs(),
@@ -38,6 +32,9 @@ mixin MyLinkAttachmentPolicy implements LinkAttachmentPolicy {
               pointPosition.dy / pointPosition.dy.abs());
         }
         return Alignment(pointAlignment.dx, pointAlignment.dy);
+        break;
+      default:
+        return Alignment.center;
         break;
     }
   }

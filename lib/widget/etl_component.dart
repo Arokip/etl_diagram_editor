@@ -80,18 +80,21 @@ ComponentData generateEtlComponentData({
     // }
     bool isPortInput = port.io == EtlPortItemType.inputConf ||
         port.io == EtlPortItemType.input;
-    Color portColor = Color('a${port.portType}'.hashCode | 0xFF000000);
+    Color portColor =
+        Color('randomString${port.portType}'.hashCode | 0xFF000000);
     portDataList.add(
       PortData(
         binding: port.binding,
         color: portColor,
+        io: isPortInput ? PortIO.input : PortIO.output,
         alignmentOnComponent: Alignment(
             (isPortInput) ? -1 : 1,
             (isPortInput)
                 ? ((2 * inPortIndex++ - 1) / (inPortCount * 2)) * 2 - 1
                 : ((2 * outPortIndex++ - 1) / (outPortCount * 2)) * 2 - 1),
-        type:
-            '${port.portType}${(isPortInput) ? EtlPortItemType.input.toString() : EtlPortItemType.output.toString()}',
+        // type:
+        //     '${port.portType}${(isPortInput) ? EtlPortItemType.input.toString() : EtlPortItemType.output.toString()}',
+        type: port.portType,
       ),
     );
   });

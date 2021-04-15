@@ -12,7 +12,8 @@ mixin MyComponentWidgetsPolicy implements ComponentWidgetsPolicy, CustomPolicy {
     bool showOptions = (!isMultipleSelectionOn);
 
     return Visibility(
-      visible: componentData.data.isHighlightVisible,
+      visible: componentData.type == 'component' &&
+          componentData.data.isHighlightVisible,
       child: Stack(
         children: [
           if (showOptions) componentTopOptions(componentData, context),
@@ -37,7 +38,7 @@ mixin MyComponentWidgetsPolicy implements ComponentWidgetsPolicy, CustomPolicy {
             tooltip: 'delete',
             size: 40,
             onPressed: () {
-              canvasWriter.model.removeComponent(componentData.id);
+              canvasWriter.model.removeComponentWithChildren(componentData.id);
               selectedComponentId = null;
             },
           ),
@@ -49,7 +50,6 @@ mixin MyComponentWidgetsPolicy implements ComponentWidgetsPolicy, CustomPolicy {
             size: 40,
             onPressed: () {
               String newId = duplicate(componentData);
-              canvasWriter.model.moveComponentToTheFront(newId);
               selectedComponentId = newId;
               hideComponentHighlight(componentData.id);
               highlightComponent(newId);

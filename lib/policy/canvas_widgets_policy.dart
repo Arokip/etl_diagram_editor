@@ -25,7 +25,8 @@ mixin MyCanvasWidgetsPolicy implements CanvasWidgetsPolicy, CustomPolicy {
     ComponentData componentData = details.data;
     Offset componentPosition =
         canvasReader.state.fromCanvasCoordinates(localOffset);
-    String componentId = canvasWriter.model.addComponent(
+
+    addComponentDataWithPorts(
       ComponentData(
         position: componentPosition,
         data: MyComponentData.copy(componentData.data),
@@ -34,7 +35,5 @@ mixin MyCanvasWidgetsPolicy implements CanvasWidgetsPolicy, CustomPolicy {
         type: componentData.type,
       ),
     );
-
-    canvasWriter.model.moveComponentToTheFrontWithChildren(componentId);
   }
 }

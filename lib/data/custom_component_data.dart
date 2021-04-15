@@ -26,18 +26,7 @@ class MyComponentData {
           label: customData.label,
           description: customData.description,
           note: customData.note,
-          ports: customData.ports,
+          ports: List.from(
+              customData.ports.map((portData) => PortData.copy(portData))),
         );
-
-  switchHighlight() {
-    isHighlightVisible = !isHighlightVisible;
-  }
-
-  showHighlight() {
-    isHighlightVisible = true;
-  }
-
-  hideHighlight() {
-    isHighlightVisible = false;
-  }
 }

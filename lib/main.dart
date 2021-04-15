@@ -17,7 +17,7 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
   MyPolicySet myPolicySet = MyPolicySet();
 
   bool isMenuVisible = true;
-  bool isOptionsVisible = true;
+  bool areOptionsVisible = true;
 
   Future<bool> isComponentSetLoading;
 
@@ -48,6 +48,55 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
                   ),
                 ),
               ),
+              Positioned(
+                top: 0,
+                left: 0,
+                bottom: 0,
+                child: Row(
+                  children: [
+                    Visibility(
+                      visible: isMenuVisible,
+                      child: Container(
+                        color: Colors.grey.withOpacity(0.7),
+                        width: 120,
+                        height: 400,
+                        // child: DraggableMenu(myPolicySet: myPolicySet),
+                        child: Center(
+                          child: FutureBuilder<bool>(
+                            future: isComponentSetLoading,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return DraggableMenu(myPolicySet: myPolicySet);
+                              } else if (snapshot.hasError) {
+                                return Text("Error: ${snapshot.error}");
+                              }
+                              return CircularProgressIndicator();
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    RotatedBox(
+                      quarterTurns: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isMenuVisible = !isMenuVisible;
+                          });
+                        },
+                        child: Container(
+                          color: Colors.grey[300],
+                          child: Padding(
+                            padding: EdgeInsets.all(4),
+                            child:
+                                Text(isMenuVisible ? 'hide menu' : 'show menu'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
@@ -58,17 +107,17 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
                       OptionIcon(
                         color: Colors.grey.withOpacity(0.7),
                         iconData:
-                            isOptionsVisible ? Icons.menu_open : Icons.menu,
+                            areOptionsVisible ? Icons.menu_open : Icons.menu,
                         shape: BoxShape.rectangle,
                         onPressed: () {
                           setState(() {
-                            isOptionsVisible = !isOptionsVisible;
+                            areOptionsVisible = !areOptionsVisible;
                           });
                         },
                       ),
                       SizedBox(width: 8),
                       Visibility(
-                        visible: isOptionsVisible,
+                        visible: areOptionsVisible,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
@@ -146,55 +195,6 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
                       ),
                     ],
                   ),
-                ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                bottom: 0,
-                child: Row(
-                  children: [
-                    Visibility(
-                      visible: isMenuVisible,
-                      child: Container(
-                        color: Colors.grey.withOpacity(0.7),
-                        width: 120,
-                        height: 400,
-                        // child: DraggableMenu(myPolicySet: myPolicySet),
-                        child: Center(
-                          child: FutureBuilder<bool>(
-                            future: isComponentSetLoading,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return DraggableMenu(myPolicySet: myPolicySet);
-                              } else if (snapshot.hasError) {
-                                return Text("Error: ${snapshot.error}");
-                              }
-                              return CircularProgressIndicator();
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    RotatedBox(
-                      quarterTurns: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isMenuVisible = !isMenuVisible;
-                          });
-                        },
-                        child: Container(
-                          color: Colors.grey[300],
-                          child: Padding(
-                            padding: EdgeInsets.all(4),
-                            child:
-                                Text(isMenuVisible ? 'hide menu' : 'show menu'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
               Positioned(
