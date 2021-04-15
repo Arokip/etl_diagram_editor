@@ -62,7 +62,19 @@ mixin MyComponentWidgetsPolicy implements ComponentWidgetsPolicy, CustomPolicy {
             iconData: Icons.edit,
             tooltip: 'edit',
             size: 40,
-            onPressed: () => showEditComponentDialog(context, componentData),
+            onPressed: () {
+              showEditComponentDialog(
+                context,
+                componentData,
+                canvasReader.model
+                    .getAllComponents()
+                    .values
+                    .where(
+                        (comp) => componentData.childrenIds.contains(comp.id))
+                    .toList(),
+                canvasWriter.model.updateComponentLinks,
+              );
+            },
           ),
           SizedBox(width: 12),
         ],

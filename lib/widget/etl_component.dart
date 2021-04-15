@@ -37,6 +37,7 @@ class EtlComponent extends StatelessWidget {
             if (customData.description != null && customData.description != '')
               Text(
                 customData.description,
+                maxLines: 1,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12),
               ),

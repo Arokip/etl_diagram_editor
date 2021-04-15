@@ -28,7 +28,6 @@ class EtlComponentsJsonObject {
   }
 
   EtlComponentsGraph getComponentGraphFromTemplateId(String templateId) {
-    print('getComponentGraphFromTemplateId');
     return graphList.firstWhere((graph) {
       if (graph.graphItems.whereType<EtlJarTemplateItem>().isNotEmpty) {
         if (graph.graphItems.whereType<EtlJarTemplateItem>().single.id ==
@@ -56,30 +55,19 @@ class EtlComponentsGraph {
   });
 
   factory EtlComponentsGraph.fromJson(Map<String, dynamic> json) {
-    print('EtlJsonGraph.fromJson');
-    print('EtlJsonGraph json type: ${json.runtimeType}');
-
     var graphItems = (json['@graph'] as List).map((graphItem) {
       var graphItemAsList = (graphItem['@type'] as List);
       if (graphItemAsList.contains(jarTemplateType)) {
-        print('typ jarTemplate');
         return EtlJarTemplateItem.fromJson(graphItem);
       } else if (graphItemAsList.contains(templateType)) {
-        print('typ temp');
-        // print('return null');
         return EtlTemplateItem.fromJson(graphItem);
-        // return null;
       } else if (graphItemAsList.contains(inputConfPortType)) {
-        print('typ confPort');
         return EtlPortItem.fromJson(graphItem, EtlPortItemType.inputConf);
       } else if (graphItemAsList.contains(inputPortType)) {
-        print('typ inputPort');
         return EtlPortItem.fromJson(graphItem, EtlPortItemType.input);
       } else if (graphItemAsList.contains(outputPortType)) {
-        print('typ outputPort');
         return EtlPortItem.fromJson(graphItem, EtlPortItemType.output);
       }
-      print('graphItem type: ${graphItem['@type']}');
       return null;
     }).toList();
     graphItems.removeWhere((value) => value == null);
