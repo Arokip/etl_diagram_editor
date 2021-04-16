@@ -66,7 +66,7 @@ abstract class EtlPipelineGraphItem {}
 
 class EtlPipelineItem extends EtlPipelineGraphItem {
   final String id;
-  final List<String> label;
+  final String label;
 
   EtlPipelineItem({
     this.id,
@@ -76,8 +76,7 @@ class EtlPipelineItem extends EtlPipelineGraphItem {
   factory EtlPipelineItem.fromJson(Map<String, dynamic> json) {
     return EtlPipelineItem(
       id: json['@id'],
-      label:
-          (json[labelType] as List).map((e) => e['@value'].toString()).toList(),
+      label: (json[labelType] as List).first['@value'],
     );
   }
 }

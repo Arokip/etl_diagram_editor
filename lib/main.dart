@@ -123,11 +123,32 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
                   TextButton(
                     onPressed: () {
                       myPolicySet.removeAll();
-                      myPolicySet.loadPipeline(pipelineUrlController.text);
+                      isDiagramLoading =
+                          myPolicySet.loadPipeline(pipelineUrlController.text);
+                      setState(() {});
                     },
                     child: Text('LOAD'),
                   ),
                 ]),
+              ),
+              Positioned(
+                left: 16,
+                top: 16,
+                child: Container(
+                  color: Colors.grey.withOpacity(0.2),
+                  child: FutureBuilder<bool>(
+                    future: isDiagramLoading,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                            'Pipeline name: ${myPolicySet.pipelineLabel}');
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      }
+                      return SizedBox.shrink();
+                    },
+                  ),
+                ),
               ),
               Align(
                 alignment: Alignment.bottomLeft,

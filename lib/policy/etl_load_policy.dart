@@ -11,6 +11,8 @@ import 'package:etl_diagram_editor/widget/etl_component.dart';
 import 'package:flutter/material.dart';
 
 mixin EtlLoadPolicy implements PolicySet, CustomPolicy {
+  String pipelineLabel;
+
   Future<bool> loadComponentSet() async {
     EtlHttp etlHttp = EtlHttp();
 
@@ -109,6 +111,9 @@ mixin EtlLoadPolicy implements PolicySet, CustomPolicy {
     var etlDiagramGraph = etlDiagramJsonObject.getEtlPipelineGraph();
 
     etlDiagramGraph.graphItems.forEach((item) {
+      if (item is EtlPipelineItem) {
+        this.pipelineLabel = item.label;
+      }
       if (item is EtlComponentItem) {
         var componentData = duplicate(
             menuComponents
