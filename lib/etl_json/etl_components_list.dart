@@ -11,6 +11,7 @@ String inputConfPortType =
     'http://linkedpipes.com/ontology/RuntimeConfiguration';
 String inputPortType = 'http://linkedpipes.com/ontology/Input';
 String outputPortType = 'http://linkedpipes.com/ontology/Output';
+String taskListPortType = 'http://linkedpipes.com/ontology/TaskList';
 
 String portBindingType = 'http://linkedpipes.com/ontology/binding';
 String portTypeSubType = 'http://linkedpipes.com/ontology/dataUnit';
@@ -67,6 +68,8 @@ class EtlComponentsGraph {
         return EtlPortItem.fromJson(graphItem, EtlPortItemType.input);
       } else if (graphItemAsList.contains(outputPortType)) {
         return EtlPortItem.fromJson(graphItem, EtlPortItemType.output);
+      } else if (graphItemAsList.contains(taskListPortType)) {
+        return EtlPortItem.fromJson(graphItem, EtlPortItemType.taskList);
       }
       return null;
     }).toList();
@@ -121,7 +124,7 @@ class EtlTemplateItem extends EtlComponentsGraphItem {
   }
 }
 
-enum EtlPortItemType { inputConf, input, output }
+enum EtlPortItemType { inputConf, input, output, taskList }
 
 class EtlPortItem extends EtlComponentsGraphItem {
   final String id;

@@ -58,6 +58,7 @@ ComponentData generateEtlComponentData({
   int inPortCount = ports
       .where((port) =>
           port.io == EtlPortItemType.inputConf ||
+          port.io == EtlPortItemType.taskList ||
           port.io == EtlPortItemType.input)
       .length;
   int outPortCount =
@@ -67,6 +68,7 @@ ComponentData generateEtlComponentData({
 
   ports.forEach((port) {
     bool isPortInput = port.io == EtlPortItemType.inputConf ||
+        port.io == EtlPortItemType.taskList ||
         port.io == EtlPortItemType.input;
     Color portColor =
         Color('randomString${port.portType}'.hashCode | 0xFF000000);

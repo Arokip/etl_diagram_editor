@@ -148,6 +148,8 @@ mixin EtlLoadPolicy implements PolicySet, CustomPolicy {
       }
     });
 
+    etlDiagramGraph.graphItems.forEach((EtlPipelineGraphItem item) {});
+
     etlDiagramGraph.graphItems.forEach((item) {
       if (item is EtlConnectionItem) {
         var sourceComponent =
@@ -184,14 +186,19 @@ mixin EtlLoadPolicy implements PolicySet, CustomPolicy {
               etlDiagramGraph.graphItems.whereType<EtlVertexItem>().toList();
           SplayTreeMap<int, Offset> vertexMap = SplayTreeMap<int, Offset>();
           item.vertices.forEach((String vertexId) {
-            EtlVertexItem vertexItem =
-                vertexList.singleWhere((element) => element.id == vertexId);
-            vertexMap[vertexItem.order] = Offset(vertexItem.x, vertexItem.y);
+            EtlVertexItem vertexItem = vertexList.singleWhere(
+                (element) => element.id == vertexId,
+                orElse: () => null);
+            if (vertexItem != null) {
+              // sometimes there are some random vertices in json that doesn't exists.
+              vertexMap[vertexItem.order] = Offset(vertexItem.x, vertexItem.y);
+            }
           });
           for (final int index in vertexMap.keys) {
             link.insertMiddlePoint(vertexMap[index], index);
           }
         }
+        canvasWriter.model.updateLink(linkId);
       }
     });
 
