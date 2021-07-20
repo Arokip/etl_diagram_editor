@@ -24,7 +24,7 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
 
   final pipelineUrlController = TextEditingController(
       text:
-          'https://demo.etl.linkedpipes.com/resources/pipelines/1560425451529');
+          'https://demo.etl.linkedpipes.com/resources/pipelines/1560425451529'); // example
 
   @override
   void initState() {
