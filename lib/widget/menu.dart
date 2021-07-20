@@ -39,7 +39,6 @@ class DraggableMenu extends StatelessWidget {
     );
   }
 
-  // TODO: generate etl component data
   ComponentData getComponentData(String componentType) {
     switch (componentType) {
       default:

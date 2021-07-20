@@ -32,7 +32,6 @@ void showEditComponentDialog(
               SizedBox(height: 16),
               TextField(
                 controller: labelController,
-                // maxLines: 4,
                 decoration: InputDecoration(
                   labelText: 'Label',
                 ),
