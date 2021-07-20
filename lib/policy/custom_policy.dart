@@ -46,7 +46,6 @@ mixin CustomPolicy implements PolicySet {
   }
 
   highlightPossiblePorts(String portId) {
-    // ComponentData portComponent = canvasReader.model.getComponent(portId);
     var components = canvasReader.model.canvasModel.components.values;
 
     components.forEach((port) {

@@ -24,16 +24,7 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
 
   final pipelineUrlController = TextEditingController(
       text:
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1519816576397');
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1497543801843');
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1468331256943');
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1468324550431'); // red comps
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1496234146217'); // orange comps, taskList port
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1523884082316'); // taskList
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1495517674532'); // random vertex that doesn't exists, red comps
-          // 'https://demo.etl.linkedpipes.com/resources/pipelines/created-1494913739303'); // link from component to port (not blue) --> bad state, error
-
-          'https://demo.etl.linkedpipes.com/resources/pipelines/1560425451529'); // good example
+          'https://demo.etl.linkedpipes.com/resources/pipelines/1560425451529'); // example
 
   @override
   void initState() {
@@ -48,7 +39,6 @@ class _SimpleDemoEditorState extends State<SimpleDemoEditor> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // showPerformanceOverlay: !kIsWeb,
       home: Scaffold(
         body: SafeArea(
           child: Stack(
