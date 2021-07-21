@@ -11,7 +11,9 @@ class EtlHttp {
         baseUrl,
         unencodedPath,
       ),
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      headers: {
+        'Accept': 'application/ld+json; charset=utf-8',
+      },
     );
 
     if (response.statusCode == 200) {
