@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cz.arokip.etl_diagram_editor">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="etl_diagram_editor"
